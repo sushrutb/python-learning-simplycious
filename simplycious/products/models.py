@@ -13,6 +13,8 @@ class Category(models.Model):
     name = models.CharField(max_length=1024)
     desc = models.TextField()
     parent = models.ForeignKey('self', null=True)
+    slug = models.SlugField()
+    logo = models.URLField()
     tags = models.ManyToManyField(Tag, through='CategoryTag')
     last_modified = models.DateTimeField(auto_now = True)
     
