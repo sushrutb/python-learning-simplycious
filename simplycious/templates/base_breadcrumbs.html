@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block Content %}
+<ul class="breadcrumb">
+{% for crumb in crumbs %}
+{% if forloop.last %}
+<li class="active">{{crumb}}</li>
+{% else %}
+<li>
+	<a href="#">{{crumb}}</a> <span class="divider">/</span>
+</li>
+{% endif %}
+
+{% endfor %}
+</ul>
+{% block mainContent %} {% endblock %}
+{% endblock%}

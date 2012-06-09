@@ -1,8 +1,13 @@
 from django.db import models
 from django.db.models.sql.constants import NULLABLE
+from django import forms
 
-
-# Create your models here.
+class AddCategoryForm(forms.Form):
+    name = forms.CharField()
+    desc = forms.CharField(widget=forms.Textarea)
+    slug = forms.SlugField()
+    logo = forms.URLField()
+    tags = forms.CharField(widget=forms.Textarea)
 
 class Tag(models.Model):
     name = models.CharField(max_length=256)
