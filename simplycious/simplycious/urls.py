@@ -7,6 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
                        url(r'^products/$', 'products.views.index'),
+                       url(r'^products/add/$', 'products.views.add'),
                        url(r'^products/(?P<product_id>\d+/$)', 'products.views.productdetail'),
                        url(r'^tag/', include('tags.urls')),
                        
