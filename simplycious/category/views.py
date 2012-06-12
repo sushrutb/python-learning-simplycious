@@ -2,7 +2,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import Context, loader
-from products.models import Category, Tag, AddCategoryForm, CategoryTag
+from products.models import Category, Tag, AddCategoryForm, CategoryTag, Product
 
 
 def index(request):
@@ -16,8 +16,18 @@ def index(request):
                 })
     return HttpResponse(t.render(c))
 
-def categorydetail(request, cat_slug):
-    return HttpResponse("category details page")
+def get_by_slug(request, cat_slug):
+    category = Category.objects.get(slug=cat_slug)
+    tag_list = CategoryTag.objects.filter(category=category)
+    product_list = Product.objects.filter(category=category).order_by('last_modified')
+    crumbs = ('Home', 'Category', category.name)
+
+    return render(request, 'category/add.html', {
+        'crumbs': crumbs,
+        'category' : category,
+        'tag_list' : tag_list,
+        'product_list' : product_list,
+    })
 
 
 def add(request):

@@ -4,6 +4,7 @@ from django.forms.widgets import Textarea
 
 class AddCategoryForm(forms.Form):
     name = forms.CharField()
+    tagline = forms.CharField()
     desc = forms.CharField(widget=forms.Textarea)
     slug = forms.SlugField()
     logo = forms.URLField()
@@ -45,6 +46,7 @@ class Tag(models.Model):
     
 class Category(models.Model):
     name = models.CharField(max_length=1024)
+    tagline = models.TextField()
     desc = models.TextField()
     parent = models.ForeignKey('self', null=True)
     slug = models.SlugField()
@@ -61,6 +63,7 @@ class Product(models.Model):
     url = models.CharField(max_length=1024)
     logo = models.CharField(max_length = 1024)
     tagline = models.TextField()
+    temp_new = models.TextField()
     
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tag, through='ProductTag')
