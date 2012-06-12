@@ -11,12 +11,41 @@ def index(request):
                   })
     return HttpResponse(t.render(c))
 
+def get_by_id(request, product_id):
+    print product_id
+    crumbs = ('Home', 'Products', product_id)
+    product = Product.objects.filter(id=product_id)
+    product = product[0]
+    include_tag_list = ProductTag.objects.filter(product=product, include=True)
+    exclude_tag_list = ProductTag.objects.filter(product=product, include=False)
+    
+    return render(request, 'products/product.html', {
+        'crumbs': crumbs,
+        'product':product,
+        'include_tag_list':include_tag_list,
+        'exclude_tag_list':exclude_tag_list,
+    })
+
+def get_by_name(request, product_slug):
+    crumbs = ('Home', 'Products', product_slug)
+    product = Product.objects.filter(slug=product_slug)[0]
+    include_tag_list = ProductTag.objects.filter(product=product, include=True)
+    exclude_tag_list = ProductTag.objects.filter(product=product, include=False)
+    
+    return render(request, 'products/product.html', {
+        'crumbs': crumbs,
+        'product':product,
+        'include_tag_list':include_tag_list,
+        'exclude_tag_list':exclude_tag_list,
+    })
+
 def add(request):
     crumbs = ('Home', 'Product', 'Add')
     if request.method == "POST":
         form = AddProductForm(request.POST)
         if (form.is_valid()):
             n = form.cleaned_data['name']
+            line = form.cleaned_data['tagline']
             d = form.cleaned_data['desc']
             l = form.cleaned_data['logo']
             s = form.cleaned_data['slug']
@@ -24,7 +53,7 @@ def add(request):
             c = form.cleaned_data['category']
             cat = Category.objects.filter(id = c)[0]
             
-            product = Product(name=n, desc=d, logo=l, url=u, slug=s, category=cat)
+            product = Product(name=n, desc=d, logo=l, url=u, slug=s, category=cat, tagline=line.strip())
             product.save()
 
             
@@ -80,7 +109,7 @@ def add(request):
             for tag in tags:
                 temp_tag = Tag.objects.filter(name=tag.strip())
                 if temp_tag.count() == 0:
-                    temp_tag = Tag(name=temp_tag, desc=temp_tag)
+                    temp_tag = Tag(name=tag, desc=tag)
                     temp_tag.save()
                     category_tag = CategoryTag(category=cat, tag=temp_tag, count=1)
                     category_tag.save()

@@ -11,6 +11,7 @@ class AddCategoryForm(forms.Form):
 
 class AddProductForm(forms.Form):
     name = forms.CharField()
+    tagline = forms.CharField()
     desc = forms.CharField(widget=forms.Textarea)
     slug = forms.SlugField()
     url = forms.URLField()
@@ -59,6 +60,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=64, unique=True)
     url = models.CharField(max_length=1024)
     logo = models.CharField(max_length = 1024)
+    tagline = models.TextField()
     
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tag, through='ProductTag')

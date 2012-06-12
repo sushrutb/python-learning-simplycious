@@ -1,0 +1,75 @@
+{% extends "base_breadcrumbs.html" %}
+{% block mainContent %}
+
+	<div class="hero-unit">
+      <div class="row show-grid">
+		<div class="span4">
+		<h1>{{product.name}}</h1>
+		<p>{{product.tagline}}</p>
+		<p>
+			<a class="btn btn-primary btn-large">
+			Learn more
+			</a>
+		</p>
+		</div>
+		<div class="span6">
+			<img src="{{product.logo}}" alt="{{product.name}}" width="350px"/>
+		</div>
+		</div>
+		
+	</div>
+	<hr>
+	<div class="row show-grid">
+		<div class="span6">
+			<h4>Includes</h4>
+			<p>
+				{% for product_tag in include_tag_list %}
+				{{product_tag.tag.name}}
+				{% if not forloop.last %}
+				,
+				{% endif %}
+				{% endfor %}
+			</p>
+		</div>
+		<div class="span6">
+			<h4>Excludes</h4>
+			<p>
+				{% for product_tag in exclude_tag_list %}
+				{{product_tag.tag.name}}
+				{% if not forloop.last %}
+				,
+				{% endif %}
+				{% endfor %}
+			</p>
+		</div>
+	</div>
+	<hr>
+	<div class="row show-grid">
+		{% for screenshot in screenshot_list %}
+		<div class="span3"><img src="{{screenshot.url}}" alt="{{product.name}}" width="auto"/></div>
+		{% endfor %}
+	</div>
+      <hr>
+    <div class="tabbable tabs-left">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#videos" data-toggle="tab">Videos</a></li>
+          <li><a href="#presentations" data-toggle="tab">Presentations</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="videos">
+			  <div class="row show-grid">
+				  <div class="span4">
+				  <iframe width="280" height="235" src="http://www.youtube.com/embed/sdy_lqK41FU" frameborder="0" allowfullscreen></iframe>
+				  </div>
+				  <div class="span4">
+				  <iframe width="280" height="235" src="http://www.youtube.com/embed/sdy_lqK41FU" frameborder="0" allowfullscreen></iframe>
+				  </div>
+			  </div>
+          </div>
+          <div class="tab-pane" id="presentations">
+            <p>Howdy, I'm in Section B.</p>
+          </div>
+        </div>
+      </div> <!-- /tabbable -->
+
+{% endblock %}
