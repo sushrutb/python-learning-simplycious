@@ -123,7 +123,6 @@ INSTALLED_APPS = (
     'tags',
     'category',
     'django.contrib.admin',
-    'south',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

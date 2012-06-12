@@ -1,0 +1,22 @@
+{% extends "base_breadcrumbs.html" %}
+{% block mainContent %}
+	<table class="table table-striped table-bordered table-condensed">
+	<thead>
+		<tr>
+			<th>..</th>
+			<th><img src="{{product1.logo}}"/></th>
+			<th><img src="{{product2.logo}}"/></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for tuple_ in tuples.items %}
+		<tr>
+			<td>{{tuple_.0}}</td>
+			<td>{{tuple_.1.0}}</td>
+			<td>{{tuple_.1.1}}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+	</table>
+
+{% endblock %}

@@ -22,8 +22,8 @@
 		<div class="span12">
 			<h4>Popular tags</h4>
 			<p>
-				{% for each tag in tag_list %}
-				{{tag.name}}
+				{% for category_tag in tag_list %}
+				{{category_tag.tag.name}}
 				{% if not forloop.last %}
 				,
 				{% endif %}
@@ -38,8 +38,8 @@
 			<div class="span3"><img src="{{product.logo}}" alt="{{product.name}}" /></div>
 			<div class="span3"><h4>{{product.name}}</h4></div>
 			<div class="span3">
-				{% for product_tag in product.tags %}
-				{{product_tag.tag.name}}
+				{% for product_tag in product.tags.all %}
+				{{product_tag.name}}
 				{% if not forloop.last %}
 				, 
 				{% endif %}

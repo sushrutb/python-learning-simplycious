@@ -22,7 +22,7 @@ def get_by_slug(request, cat_slug):
     product_list = Product.objects.filter(category=category).order_by('last_modified')
     crumbs = ('Home', 'Category', category.name)
 
-    return render(request, 'category/add.html', {
+    return render(request, 'category/category.html', {
         'crumbs': crumbs,
         'category' : category,
         'tag_list' : tag_list,

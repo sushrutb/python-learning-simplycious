@@ -107,7 +107,8 @@ def add(request):
             t = form.cleaned_data['tags']
             tags = t.split(',')
             for tag in tags:
-                temp_tag = Tag.objects.filter(name=tag.strip())
+                tag = tag.strip()
+                temp_tag = Tag.objects.filter(name=tag)
                 if temp_tag.count() == 0:
                     temp_tag = Tag(name=tag, desc=tag)
                     temp_tag.save()
@@ -136,10 +137,23 @@ def add(request):
         'form': form,
         'crumbs': crumbs,
     })
+    
+def compare(request, product1_slug, product2_slug):
+    product1 = Product.objects.get(slug=product1_slug)
+    product2 = Product.objects.get(slug=product2_slug)
+    active_crumb = product1.name + ' V ' + product2.name
+    crumbs = ('Home', 'Products', 'Compare', active_crumb)
+    
+    category = product1.category
+    category_tags = category.tags.all()
+    product1_tags = [tag.name for tag in product1.tags.all()]
+    product2_tags = [tag.name for tag in product2.tags.all()]
+    tuples = dict([ (tag.name, ( tag.name in product1_tags, tag.name in product2_tags)) for tag in category_tags ])
+    
+    return render(request, 'products/compare.html', {
+        'crumbs': crumbs,
+        'tuples':tuples,
+        'product1':product1,
+        'product2':product2,
+    })
 
-def productdetail(request, product_id):
-    return HttpResponse("product details page")
-
-
-def categoryindex(request):
-    return HttpResponse("Category index page")
