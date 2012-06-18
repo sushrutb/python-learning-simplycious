@@ -1,9 +1,34 @@
-{% if product_list %}
-    <ul>
-    {% for product in product_list %}
-        <li><a href="/products/{{ product.id }}/">{{ product.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No products are available.</p>
-{% endif %}
+{% extends "base.html" %}
+{% block Content %}
+
+	<div class="hero-unit">
+		<h1>Simplycious</h1>
+		<p>Simplest way to choose software!</p>
+		<p>
+			<a class="btn btn-primary btn-large">
+			Learn more
+			</a>
+		</p>
+	</div>
+  
+  {% for products in product_list %}
+  {% with i=forloop.counter0 %}
+  {% with category=category_list.i %}
+  	{% if i|add:"3"|divisibleby:"3" %}
+  	<div class="row" style="margin-top:20px">
+  	{% endif %}
+    	<div class="span4">
+      		<img class="bs-icon" src="http://dl.dropbox.com/u/3350353/simplycious/assets/img/glyphicons_042_group.png">
+      		<h2><a href="/category/{{products.0.category.slug}}">{{ products.0.category.name }}</a></h2>
+      		<p>{% for product in products %} <a href="/product/{{product.slug}}">{{product.name}} </a> {% if not forloop.last %},{% endif %} 
+      			{% endfor %}
+      		</p>
+    	</div>
+  	{% if i|add:"1"|divisibleby:"3" %}
+  	</div>
+  	{% endif %}
+  {% endwith %}
+  {% endwith %}
+  {% endfor %}
+ </div>
+{% endblock %}

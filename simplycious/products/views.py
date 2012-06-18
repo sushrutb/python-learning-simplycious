@@ -4,10 +4,13 @@ from django.template import Context, loader
 from products.models import Product, Category, Screenshot, ProductTag, AddProductForm, Video, Presentation, Tag, CategoryTag
 
 def index(request):
-    products_list= Product.objects.all().order_by('id')
+    category_list = Category.objects.all()
+
+    product_list = [[product for product in Product.objects.filter(category=category)] for category in category_list]
     t = loader.get_template('products/index.html')
     c = Context ({
-                  'product_list' : products_list,
+                  'category_list' : category_list,
+                  'product_list': product_list,
                   })
     return HttpResponse(t.render(c))
 

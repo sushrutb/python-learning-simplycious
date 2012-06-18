@@ -2,6 +2,19 @@ from django.db import models
 from django import forms
 from django.forms.widgets import Textarea
 
+class AddTagForm(forms.Form):
+    name = forms.CharField()
+    desc = forms.CharField(required=False)
+    parent = forms.ChoiceField(choices=(), widget=forms.Select, required=False)
+    related = forms.ChoiceField(choices=(), widget=forms.Select, required=False)
+    def __init__(self, *args, **kwargs):
+        super(AddTagForm, self).__init__(*args, **kwargs)
+        self.fields['parent'] = forms.ChoiceField(
+            choices=[('', '----------')]+ [(tag.id, tag.name) for tag in Tag.objects.all()])
+        self.fields['related'] = forms.ChoiceField(
+            choices=[('', '----------')]+ [(tag.id, tag.name) for tag in Tag.objects.all()])
+        
+        
 class AddCategoryForm(forms.Form):
     name = forms.CharField()
     tagline = forms.CharField()
@@ -9,6 +22,12 @@ class AddCategoryForm(forms.Form):
     slug = forms.SlugField()
     logo = forms.URLField()
     tags = forms.CharField(widget=forms.Textarea)
+    parent = forms.ChoiceField(choices = (), widget=forms.Select, required=False)
+
+    def __init__(self, *args, **kwargs):
+        super(AddCategoryForm, self).__init__(*args, **kwargs)
+        self.fields['parent'] = forms.ChoiceField(
+            choices=[('', '----------')]+ [(category.id, category.name) for category in Category.objects.all()])
 
 class AddProductForm(forms.Form):
     name = forms.CharField()
@@ -41,7 +60,9 @@ class AddProductForm(forms.Form):
 
 class Tag(models.Model):
     name = models.CharField(max_length=256)
-    desc = models.TextField()
+    desc = models.TextField(null=True)
+    parent = models.ForeignKey('self', null=True)
+    related = models.ForeignKey('self', null=True, related_name='related_tags')
     last_modified = models.DateTimeField(auto_now = True)
     
 class Category(models.Model):
@@ -63,7 +84,6 @@ class Product(models.Model):
     url = models.CharField(max_length=1024)
     logo = models.CharField(max_length = 1024)
     tagline = models.TextField()
-    temp_new = models.TextField()
     
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tag, through='ProductTag')
