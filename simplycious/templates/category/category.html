@@ -32,20 +32,34 @@
 		</div>
 	</div>
 	<hr>
-	<div class="row show-grid">
+	<div class="row show-grid" >
 		{% for product in product_list %}
-		<div class="span12">
-			<div class="span3"><img src="{{product.logo}}" alt="{{product.name}}" /></div>
-			<div class="span3"><h4>{{product.name}}</h4></div>
-			<div class="span3">
-				{% for product_tag in product.tags.all %}
-				{{product_tag.name}}
-				{% if not forloop.last %}
-				, 
-				{% endif %}
-				{% endfor %}
+		<div class="span12" style="background-image:url(http://subtlepatterns.com/patterns/stitched_wool.png);margin-bottom: 10px">
+			<h3 style="margin-top:5px;margin-left:20px">{{product.name}} | {{product.tagline}}</h3>
+			<div class="row">
+				<hr style="line-height:5px;margin-top:2px;margin-bottom:5px">
+				<div class="span2">
+					<img style="margin-left:5px" src="{{product.logo}}" height="30px" width="120px"/>
+				</div>
+				<div class="span7">
+					<p>{{product.desc}}Some description some description some description Some description some description some description Some description some description some description</p>
+				</div>
+			</div>
+			<div class="row">
+				<hr style="line-height:5px;margin-top:2px;margin-bottom:5px">
+				<div class="span2">
+					<h5 style="margin-left:5px;margin-bottom:3px">6 upvotes 2 downvotes</h5>
+				</div>
+				<div class="span1">
+					<h5 style="margin-left:5px;margin-bottom:3px">|</h5>
+				</div>
+				<div class="span3">
+					<h5 style="margin-left:5px;margin-bottom:3px">4 reviews</h5>
+				</div>
 			</div>
 		</div>
 		{% endfor %}
+	</div>
+
 	</div>
 {% endblock %}
