@@ -8,20 +8,13 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="http://dl.dropbox.com/u/3350353/simplycious/assets/bootstrap.css" rel="stylesheet">
-    
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .content .span4 {
-		margin-left: 0;
-		padding-left: 19px;
-		border-left: 1px solid #eee;
-		}
-
-    </style>
+    <link href="/home/sushrut/Dropbox/Public/simplycious/assets/bootstrap.css" rel="stylesheet">
+    <link href="http://dl.dropbox.com/u/3350353/simplycious/assets/simplycious.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Port+Lligat+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Belleza' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Marko+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Port+Lligat+Sans' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Marko+One' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Port+Lligat+Sans' rel='stylesheet' type='text/css'>
     <!-- <link href="css/bootstrap-responsive.css" rel="stylesheet"> -->
@@ -41,26 +34,35 @@
 
   <body>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Simplycious</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Login</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#">Simplycious</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+            <li class="active"><a href="#">Enterprise</a></li>
+            <li><a href="#">Personal</a></li>
+            <li><a href="#">Mobile</a></li>
+            <li><a href="#">Social</a></li>
+            <li><a href="#">Tablet</a></li>
+            <li><a href="#">Misc</a></li>
+            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+          </ul>
+          <form class="navbar-search pull-left" action="">
+            <input type="text" class="search-query span2" style="width:203px;" placeholder="Search">
+          </form>
+        </div><!-- /.nav-collapse -->
       </div>
-    </div>
-
+    </div><!-- /navbar-inner -->
+  </div><!-- /navbar -->
     <div class="container">
 
       <!-- Main hero unit for a primary marketing message or call to action -->
@@ -92,45 +94,72 @@
 		</div>
 		
 	<div class="row show-grid" style="margin-bottom:20px">
-		<div class="span12">
+		<div class="span12 popular-tags">
 			<h4>Popular tags</h4>
-			<p>Tag1, tag2, tag3, tag4, Tag1, tag2, tag3, tag4, Tag1, tag2, tag3, tag4, Tag1, tag2, tag3, tag4 </p>
+			<div><span>Tag1</span><span>Tag1</span><span>Tag1</span></div>
 		</div>
 	</div>
 	<hr>
 
 	<div class="row show-grid" >
-		<div class="span12" style="background-image:url(http://subtlepatterns.com/patterns/stitched_wool.png)">
-			<h3 style="margin-top:5px;margin-left:20px">Freshdesk | Your social helpdesk</h3>
-			<div class="row">
-				<hr style="line-height:5px;margin-top:2px;margin-bottom:5px">
-				<div class="span2">
-					<img style="margin-left:5px" src="http://freshdesk.com/images/logo.png" height="30px" width="120px"/>
+		<div class="span12 product-row">
+			<h3>Freshdesk &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;Your social helpdesk</h3>
+			<div class="row product-inner-row">
+				<hr>
+				<div class="span2 product-element">
+					<img src="http://freshdesk.com/images/logo.png"/>
 				</div>
-				<div class="span7">
+				<div class="span7 offset1 product-element">
 					<p>Some description some description some description Some description some description some description Some description some description some description</p>
 				</div>
+				<div class="span1">
+					
+				</div>
 			</div>
-			<div class="row">
-				<hr style="line-height:5px;margin-top:2px;margin-bottom:5px">
+			<div class="row product-inner-row">
+				<hr>
 				<div class="span2">
-					<h5 style="margin-left:5px;margin-bottom:3px">6 upvotes 2 downvotes</h5>
+					<h5>6 upvotes 2 downvotes</h5>
 				</div>
 				<div class="span1">
-					<h5 style="margin-left:5px;margin-bottom:3px">|</h5>
+					<h5>|</h5>
 				</div>
 				<div class="span3">
-					<h5 style="margin-left:5px;margin-bottom:3px">4 reviews</h5>
+					<h5>4 reviews</h5>
 				</div>
 			</div>
 		</div>
 	</div>
-	<hr>
-    <footer>
-       <p>&copy; Wissen Systems Pvt Ltd 2012</p>
-    </footer>
-
     </div> <!-- /container -->
+<!-- footer -->
+<footer>
+	<div class="container">
+		<div class="span3">
+			<h3>Categories</h3>
+			<ul class="unstyled">
+				<li>Enterprise</li>
+				<li>Mobile</li>
+				<li>Personal</li>
+				<li>Social</li>
+				<li>Tablet</li>
+				<li>Misc</li>
+			</ul>
+		</div>
+		<div class="span3">
+			<h3>Products</h3>
+			<ul class="unstyled">
+				<li>Add</li>
+				<li>Search</li>
+				<li>Random</li>
+			</ul>
+		</div>
+		<div class="span3 offset2">
+			<h3>About</h3>
+			<p>Simplycious is a web service which lets you compare and choose software products easily. Please contanct info@simplycious.com for any enquiries.</p>
+		</div>
+	</div>
+</footer>
+
 
     <!-- Le javascript
     ================================================== -->
