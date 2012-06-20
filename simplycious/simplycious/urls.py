@@ -9,7 +9,8 @@ urlpatterns = patterns('',
                        # shows list of products, ordered by recently added.
                        url(r'^$', 'products.views.index'),
                        # compare products
-                       url(r'^products/compare/(?P<product1_slug>[-\w]+)/(?P<product2_slug>[-\w]+)/$', 'products.views.compare'),
+                       # url(r'^products/compare/', 'products.views.compare1'),
+                       url(r'^products/compare(?:/(?P<product1_slug>[-\w]+)/(?P<product2_slug>[-\w]+))?/$', 'products.views.compare'),
                        # add a new product.
                        url(r'^product/add/$', 'products.views.add'),
                        # show a product by id

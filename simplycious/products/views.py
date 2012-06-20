@@ -15,7 +15,6 @@ def index(request):
     return HttpResponse(t.render(c))
 
 def get_by_id(request, product_id):
-    print product_id
     crumbs = ('Home', 'Products', product_id)
     product = Product.objects.filter(id=product_id)
     product = product[0]
@@ -142,21 +141,33 @@ def add(request):
     })
     
 def compare(request, product1_slug, product2_slug):
-    product1 = Product.objects.get(slug=product1_slug)
-    product2 = Product.objects.get(slug=product2_slug)
-    active_crumb = product1.name + ' V ' + product2.name
-    crumbs = ('Home', 'Products', 'Compare', active_crumb)
+    crumbs = (('Home', '/'), ('Products', '/products/'), ('Compare', '/products/compare/'))
     
-    category = product1.category
-    category_tags = category.tags.all()
-    product1_tags = [tag.name for tag in product1.tags.all()]
-    product2_tags = [tag.name for tag in product2.tags.all()]
-    tuples = dict([ (tag.name, ( tag.name in product1_tags, tag.name in product2_tags)) for tag in category_tags ])
+    if (product1_slug is not None and product1_slug.length > 0):
+        product1 = Product.objects.get(slug=product1_slug)
+        product2 = Product.objects.get(slug=product2_slug)
+        active_crumb = product1.name + ' V ' + product2.name
+        crumbs.__add__(active_crumb)
+        category = product1.category
+        category_tags = category.tags.all()
+        product1_tags = [tag.name for tag in product1.tags.all()]
+        product2_tags = [tag.name for tag in product2.tags.all()]
+        tuples = dict([ (tag.name, ( tag.name in product1_tags, tag.name in product2_tags)) for tag in category_tags ])
     
-    return render(request, 'products/compare.html', {
-        'crumbs': crumbs,
-        'tuples':tuples,
-        'product1':product1,
-        'product2':product2,
-    })
+        return render(request, 'products/compare.html', {
+            'crumbs': crumbs,
+            'tuples':tuples,
+            'product1':product1,
+            'product2':product2,
+        })
+    else:
+        return render(request, 'products/compare.html', {
+            'crumbs': crumbs,
+            'tuples':None,
+            'product1':None,
+            'product2':None,
+        })
+        
+        
+    
 

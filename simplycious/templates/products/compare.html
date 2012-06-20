@@ -7,6 +7,7 @@
 	<button type="submit" class="btn btn-primary" style="margin-left:50px">Compare</button>
 </form>
 
+{% ifnotequal product1 None %}
 <h3 style="text-align:center;text-decoration:underline">Comparision between {{product1.name}} and {{product2.name}} {{product1.category.name}} software.</h3>
 
 <table class="table table-striped table-bordered" style="margin-top:20px">
@@ -27,5 +28,6 @@
 	{% endfor %}
 </tbody>
 </table>
+{% endifnotequal %}
 
 {% endblock %}

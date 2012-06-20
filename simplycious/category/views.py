@@ -6,7 +6,7 @@ from products.models import Category, Tag, AddCategoryForm, CategoryTag, Product
 
 
 def index(request):
-    crumbs = ('Home', 'Category', 'index')
+    crumbs = (('Home', '/'), ('Category', '/category/'), ('index', ''))
     category_list = Category.objects.all() 
     t = loader.get_template('category/list.html')
     
@@ -17,10 +17,33 @@ def index(request):
     return HttpResponse(t.render(c))
 
 def get_by_slug(request, cat_slug):
+
     category = Category.objects.get(slug=cat_slug)
     tag_list = CategoryTag.objects.filter(category=category)
     product_list = Product.objects.filter(category=category).order_by('last_modified')
-    crumbs = ('Home', 'Category', category.name)
+
+    
+    filters = request.GET.get('filters', '')
+    add_filter = request.GET.get('add_filter', '')
+    remove_filter = request.GET.get('remove_filter', '')
+    
+    if filters is not None and filters.length > 0 :
+        # Do nothing
+        print 'nothing'
+        
+    if add_filter is not None and add_filter.length > 0:
+        # Add this to filters list
+        filters.append(add_filter)
+     
+    if remove_filter is not None and remove_filter.length > 0:
+        filters.remove(remove_filter)
+    
+    # All tags which match name of the filter
+    if filters is not None and filters.length > 0 :
+        filters = Tag.objects.filter(name__in = filters)
+        product_list = [product for product in product_list if filters in product.tags.all() ]
+        
+    crumbs = (('Home','/'), ('Category', 'category'), (category.name, ''))
 
     return render(request, 'category/category.html', {
         'crumbs': crumbs,
