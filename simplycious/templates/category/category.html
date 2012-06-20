@@ -18,48 +18,37 @@
 		
 	</div>
 	<hr>
-	<div class="row show-grid">
-		<div class="span12">
+	<div class="row show-grid" style="margin-bottom:20px">
+		<div class="span12 popular-tags">
 			<h4>Popular tags</h4>
-			<p>
-				{% for category_tag in tag_list %}
-				{{category_tag.tag.name}}
-				{% if not forloop.last %}
-				,
-				{% endif %}
-				{% endfor %} 
-				</p>
+			<div>
+			{% for category_tag in tag_list %}
+			<span>{{category_tag.tag.name}}</span>
+			{% endfor %} 
+			</div>
 		</div>
 	</div>
 	<hr>
-	<div class="row show-grid" >
-		{% for product in product_list %}
-		<div class="span12" style="background-image:url(http://subtlepatterns.com/patterns/stitched_wool.png);margin-bottom: 10px">
-			<h3 style="margin-top:5px;margin-left:20px">{{product.name}} | {{product.tagline}}</h3>
-			<div class="row">
-				<hr style="line-height:5px;margin-top:2px;margin-bottom:5px">
-				<div class="span2">
-					<img style="margin-left:5px" src="{{product.logo}}" height="30px" width="120px"/>
+	{% for product in product_list %}
+	<div class="row show-grid" style="margin-top:5px">
+		<div class="span12 product-row">
+			<h3>{{product.name}} &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp; {{product.tagline}}</h3>
+			<div class="row product-inner-row">
+				<hr>
+				<div class="span2 product-element">
+					<img src="{{product.logo}}"/>
 				</div>
-				<div class="span7">
+				<div class="span7 product-element">
 					<p>{{product.desc}}Some description some description some description Some description some description some description Some description some description some description</p>
 				</div>
-			</div>
-			<div class="row">
-				<hr style="line-height:5px;margin-top:2px;margin-bottom:5px">
-				<div class="span2">
-					<h5 style="margin-left:5px;margin-bottom:3px">6 upvotes 2 downvotes</h5>
-				</div>
-				<div class="span1">
-					<h5 style="margin-left:5px;margin-bottom:3px">|</h5>
-				</div>
-				<div class="span3">
-					<h5 style="margin-left:5px;margin-bottom:3px">4 reviews</h5>
+				<div class="span1 offset1">
+					<h5 style="margin-top:5px;margin-left:20px">6 &uarr; 2 &darr;</h5>
+					<hr>
+					<h5 style="margin-top:5px;margin-left:20px">4 reviews</h5>
 				</div>
 			</div>
 		</div>
-		{% endfor %}
 	</div>
+	{% endfor %}
 
-	</div>
 {% endblock %}

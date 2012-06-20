@@ -1,22 +1,31 @@
 {% extends "base_breadcrumbs.html" %}
 {% block mainContent %}
-	<table class="table table-striped table-bordered table-condensed">
-	<thead>
-		<tr>
-			<th>..</th>
-			<th><img src="{{product1.logo}}"/></th>
-			<th><img src="{{product2.logo}}"/></th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for tuple_ in tuples.items %}
-		<tr>
-			<td>{{tuple_.0}}</td>
-			<td>{{tuple_.1.0}}</td>
-			<td>{{tuple_.1.1}}</td>
-		</tr>
-		{% endfor %}
-	</tbody>
-	</table>
+
+<form class="well form-inline">
+	<input type="text" class="input-large" placeholder="Helpshift" style="margin-left:50px">
+	<input type="password" class="input-large" placeholder="Zendesk" style="margin-left:50px">
+	<button type="submit" class="btn btn-primary" style="margin-left:50px">Compare</button>
+</form>
+
+<h3 style="text-align:center;text-decoration:underline">Comparision between {{product1.name}} and {{product2.name}} {{product1.category.name}} software.</h3>
+
+<table class="table table-striped table-bordered" style="margin-top:20px">
+<thead>
+	<tr>
+		<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+		<th><img width="120px" height="40px" src="{{product1.logo}}" /></th>
+		<th><img width="120px" height="40px" src="{{product2.logo}}" /></th>
+	</tr>
+</thead>
+<tbody>
+	{% for tuple_ in tuples.items %}
+	<tr>
+		<td>{{tuple_.0}}</td>
+		<td style="horizontal-align:center">{{tuple_.1.0}}</td>
+		<td style="horizontal-align:center">{{tuple_.1.1}}</td>
+	</tr>
+	{% endfor %}
+</tbody>
+</table>
 
 {% endblock %}

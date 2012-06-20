@@ -15,12 +15,12 @@
   {% with i=forloop.counter0 %}
   {% with category=category_list.i %}
   	{% if i|add:"3"|divisibleby:"3" %}
-  	<div class="row" style="margin-top:20px">
+  	<div class="row" style="margin-top:40px">
   	{% endif %}
     	<div class="span4">
       		<img class="bs-icon" src="http://dl.dropbox.com/u/3350353/simplycious/assets/img/glyphicons_042_group.png">
       		<h2><a href="/category/{{products.0.category.slug}}">{{ products.0.category.name }}</a></h2>
-      		<p>{% for product in products %} <a href="/product/{{product.slug}}">{{product.name}} </a> {% if not forloop.last %},{% endif %} 
+      		<p>{% for product in products %} <a href="/product/{{product.slug}}">{{product.name}} </a> {% if not forloop.last %},&nbsp;{% endif %} 
       			{% endfor %}
       		</p>
     	</div>

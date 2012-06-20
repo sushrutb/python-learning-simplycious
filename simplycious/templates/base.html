@@ -7,10 +7,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <!-- Le styles -->
     <link href="http://dl.dropbox.com/u/3350353/simplycious/assets/bootstrap.css" rel="stylesheet">
-    
+    <link href="http://dl.dropbox.com/u/3350353/simplycious/assets/simplycious.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Port+Lligat+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Belleza' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Marko+One' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Port+Lligat+Sans' rel='stylesheet' type='text/css'>
+    <!-- <link href="css/bootstrap-responsive.css" rel="stylesheet"> -->
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -21,36 +26,90 @@
 
   <body>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Simplycious</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Login</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+	<div class="navbar navbar-fixed-top">
+	    <div class="navbar-inner">
+	      <div class="container">
+	        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	          <span class="icon-bar"></span>
+	          <span class="icon-bar"></span>
+	          <span class="icon-bar"></span>
+	        </a>
+	        <a class="brand" href="/">Simplycious</a>
+	        <div class="nav-collapse">
+	          <ul class="nav">
+	            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+	            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+	            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+	            <li><a href="/category/enterprise/">Enterprise</a></li>
+	            <li><a href="/category/personal/">Personal</a></li>
+	            <li><a href="/category/mobile/">Mobile</a></li>
+	            <li><a href="/category/social/">Social</a></li>
+	            <li><a href="/category/tablet/">Tablet</a></li>
+	            <li><a href="/category/misc/">Misc</a></li>
+	            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+	          </ul>
+	          <form class="navbar-search pull-left" action="">
+	            <input type="text" class="search-query span2" style="width:203px;" placeholder="Search">
+	          </form>
+	        </div><!-- /.nav-collapse -->
+	      </div>
+	    </div><!-- /navbar-inner -->
+	  </div><!-- /navbar -->
     
     <div class="container">
 
     {% block Content %}
     {% endblock %}
     
-    	<hr>
- 		<footer>
-        	<p>&copy; Wissen Systems Pvt Ltd 2012</p>
-     	</footer>
-     </div>
+	</div> <!-- /container -->
+
+	<!-- footer -->
+	<footer>
+		<div class="container">
+			<div class="span3">
+				<h3>Categories</h3>
+				<ul class="unstyled">
+					<li><a href="/category/enterprise/">Enterprise</a></li>
+					<li><a href="/category/personal/">Personal</a></li>
+					<li><a href="/category/mobile/">Mobile</a></li>
+					<li><a href="/category/social/">Social</a></li>
+					<li><a href="/category/tablet/">Tablet</a></li>
+					<li><a href="/category/misc/">Misc</a></li>
+				</ul>
+			</div>
+			<div class="span3">
+				<h3>Products</h3>
+				<ul class="unstyled">
+					<li><a href="/product/add/">Add</a></li>
+					<li><a href="/products/search/">Search</a></li>
+					<li><a href="/products/compare/">Compare</a></li>
+					<li><a href="/product/random/">Random</a></li>
+				</ul>
+			</div>
+			<div class="span3 offset2">
+				<h3>About</h3>
+				<p>Simplycious is a web service which lets you compare and choose software products easily. Please contanct info@simplycious.com for any enquiries.</p>
+			</div>
+		</div>
+	</footer>
+     
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://dl.dropbox.com/u/3350353/simplycious/assets/js/jquery.js"></script>
+    <script src="http://dl.dropbox.com/u/3350353/simplycious/assets/js/bootstrap-transition.js"></script>
+    <script src="http://dl.dropbox.com/u/3350353/simplycious/assets/js/bootstrap-alert.js"></script>
+    <script src="http://dl.dropbox.com/u/3350353/simplycious/assets/js/bootstrap-modal.js"></script>
+    <script src="http://dl.dropbox.com/u/3350353/simplycious/assets/js/bootstrap-dropdown.js"></script>
+    <script src="http://dl.dropbox.com/u/3350353/simplycious/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="http://dl.dropbox.com/u/3350353/simplycious/assets/js/bootstrap-tab.js"></script>
+    <script src="http://dl.dropbox.com/u/3350353/simplycious/assets/js/bootstrap-tooltip.js"></script>
+    <script src="http://dl.dropbox.com/u/3350353/simplycious/assets/js/bootstrap-popover.js"></script>
+    <script src="http://dl.dropbox.com/u/3350353/simplycious/assets/js/bootstrap-button.js"></script>
+    <script src="http://dl.dropbox.com/u/3350353/simplycious/assets/js/bootstrap-collapse.js"></script>
+    <script src="http://dl.dropbox.com/u/3350353/simplycious/assets/js/bootstrap-carousel.js"></script>
+    <script src="http://dl.dropbox.com/u/3350353/simplycious/assets/js/bootstrap-typeahead.js"></script>
 
   </body>
 </html>
