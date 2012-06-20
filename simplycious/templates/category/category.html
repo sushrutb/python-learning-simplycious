@@ -23,7 +23,11 @@
 			<h4>Popular tags</h4>
 			<div>
 			{% for category_tag in tag_list %}
-			<span>{{category_tag.tag.name}}</span>
+			{% ifequal category_tag.1 '1' %}
+			<a href="{{request.path}}?{{filter_query}}&remove_filter={{category_tag.0.name}}"><span style="color: blue">{{category_tag.0.name}}</span></a>
+			{% else %}
+			<a href="{{request.path}}?{{filter_query}}&add_filter={{category_tag.0.name}}"><span>{{category_tag.0.name}}</span></a>
+			{% endifequal %}
 			{% endfor %} 
 			</div>
 		</div>

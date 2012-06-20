@@ -23,26 +23,33 @@ def get_by_slug(request, cat_slug):
     product_list = Product.objects.filter(category=category).order_by('last_modified')
 
     
-    filters = request.GET.get('filters', '')
+    filters = request.GET.getlist('filters', list())
     add_filter = request.GET.get('add_filter', '')
     remove_filter = request.GET.get('remove_filter', '')
     
-    if filters is not None and filters.length > 0 :
-        # Do nothing
-        print 'nothing'
-        
-    if add_filter is not None and add_filter.length > 0:
-        # Add this to filters list
+    if add_filter is not None and len(add_filter) > 0:
         filters.append(add_filter)
      
-    if remove_filter is not None and remove_filter.length > 0:
+    if remove_filter is not None and len(remove_filter) > 0:
         filters.remove(remove_filter)
     
     # All tags which match name of the filter
-    if filters is not None and filters.length > 0 :
-        filters = Tag.objects.filter(name__in = filters)
-        product_list = [product for product in product_list if filters in product.tags.all() ]
+    filter_query = ''
+    if filters is not None and len(filters) > 0 :
+        print 'filters is more than 0'
+        filter_tags = list(Tag.objects.filter(name__in = filters))
+        product_list = [product for product in product_list if set(filter_tags).issubset(set(list(product.tags.all()))) ]
+        filter_query = ''
+        for i in range(0, len(filters)) :
+            filter_query = filter_query + 'filters=' + filters[i]
+            if i < len(filters) -1 :
+                filter_query = filter_query + '&'
         
+    tag_list = [(category_tag.tag, '1') if category_tag.tag.name in filters else (category_tag.tag, '0') for category_tag in tag_list]
+    
+    if len(add_filter) > 0 or len(remove_filter) > 0 :
+        return HttpResponseRedirect("/category/" + category.name + "/?" + filter_query)
+    
     crumbs = (('Home','/'), ('Category', 'category'), (category.name, ''))
 
     return render(request, 'category/category.html', {
@@ -50,6 +57,8 @@ def get_by_slug(request, cat_slug):
         'category' : category,
         'tag_list' : tag_list,
         'product_list' : product_list,
+        'request' : request,
+        'filter_query':filter_query,
     })
 
 

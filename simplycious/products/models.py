@@ -64,6 +64,9 @@ class Tag(models.Model):
     parent = models.ForeignKey('self', null=True)
     related = models.ForeignKey('self', null=True, related_name='related_tags')
     last_modified = models.DateTimeField(auto_now = True)
+    def __unicode__(self):
+        return self.name + ' > Tag'
+
     
 class Category(models.Model):
     name = models.CharField(max_length=1024)
@@ -125,4 +128,6 @@ class CategoryTag(models.Model):
     count = models.IntegerField(default = 0)
     imp = models.BooleanField(default = True)
     last_modified = models.DateTimeField(auto_now = True)  
+    def __unicode__(self):
+        return self.name + ' > CategoryTag'
     
