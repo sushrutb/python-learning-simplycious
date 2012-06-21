@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import Context, loader
-from products.models import Product, Category, Screenshot, ProductTag, AddProductForm, Video, Presentation, Tag, CategoryTag
+from products.models import Product, Category, Screenshot, ProductTag, AddProductForm, Video, Presentation, Tag, CategoryTag, CompareProductForm
 
 def index(request):
     category_list = Category.objects.all()
@@ -15,30 +15,33 @@ def index(request):
     return HttpResponse(t.render(c))
 
 def get_by_id(request, product_id):
-    crumbs = ('Home', 'Products', product_id)
     product = Product.objects.filter(id=product_id)
     product = product[0]
     include_tag_list = ProductTag.objects.filter(product=product, include=True)
     exclude_tag_list = ProductTag.objects.filter(product=product, include=False)
+
+    crumbs = [('Home', '/'), ('Products','/products'), (product.name, '/products/' + product.slug)]
     
     return render(request, 'products/product.html', {
         'crumbs': crumbs,
         'product':product,
         'include_tag_list':include_tag_list,
         'exclude_tag_list':exclude_tag_list,
+        'screenshot_list' : Screenshot.objects.filter(product=product)
     })
 
 def get_by_name(request, product_slug):
-    crumbs = ('Home', 'Products', product_slug)
     product = Product.objects.filter(slug=product_slug)[0]
     include_tag_list = ProductTag.objects.filter(product=product, include=True)
     exclude_tag_list = ProductTag.objects.filter(product=product, include=False)
     
+    crumbs = [('Home', '/'), ('Products','/products'), (product.name, '/products/' + product.slug)]
     return render(request, 'products/product.html', {
         'crumbs': crumbs,
         'product':product,
         'include_tag_list':include_tag_list,
         'exclude_tag_list':exclude_tag_list,
+        'screenshot_list' : Screenshot.objects.filter(product=product)
     })
 
 def add(request):
@@ -141,13 +144,22 @@ def add(request):
     })
     
 def compare(request, product1_slug, product2_slug):
-    crumbs = (('Home', '/'), ('Products', '/products/'), ('Compare', '/products/compare/'))
+    crumbs = [('Home', '/'), ('Products', '/products/'), ('Compare', '/products/compare/')]
     
-    if (product1_slug is not None and product1_slug.length > 0):
+    if request.method == "POST":
+        form = CompareProductForm(request.POST)
+        if (form.is_valid()):
+            product1 = form.cleaned_data['product1']
+            product2 = form.cleaned_data['product2']
+            product1 = Product.objects.filter(name=product1)[0]
+            product2 = Product.objects.filter(name=product2)[0]
+            return HttpResponseRedirect("/products/compare/" + product1.slug + "/" + product2.slug + "/")
+
+    if product1_slug is not None and len(product1_slug) > 0:
         product1 = Product.objects.get(slug=product1_slug)
         product2 = Product.objects.get(slug=product2_slug)
         active_crumb = product1.name + ' V ' + product2.name
-        crumbs.__add__(active_crumb)
+        crumbs.append((active_crumb, ''))
         category = product1.category
         category_tags = category.tags.all()
         product1_tags = [tag.name for tag in product1.tags.all()]
@@ -159,6 +171,7 @@ def compare(request, product1_slug, product2_slug):
             'tuples':tuples,
             'product1':product1,
             'product2':product2,
+            'form':CompareProductForm(),
         })
     else:
         return render(request, 'products/compare.html', {
@@ -166,6 +179,7 @@ def compare(request, product1_slug, product2_slug):
             'tuples':None,
             'product1':None,
             'product2':None,
+            'form':CompareProductForm(),
         })
         
         

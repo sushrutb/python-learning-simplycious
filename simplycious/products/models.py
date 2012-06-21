@@ -2,6 +2,10 @@ from django.db import models
 from django import forms
 from django.forms.widgets import Textarea
 
+class CompareProductForm(forms.Form):
+    product1 = forms.CharField()
+    product2 = forms.CharField()
+    
 class AddTagForm(forms.Form):
     name = forms.CharField()
     desc = forms.CharField(required=False)

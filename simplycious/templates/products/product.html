@@ -43,33 +43,35 @@
 			</p>
 		</div>
 	</div>
-	<hr>
-	<div class="row show-grid">
+<div style="height: 2px; background-color: white; text-align: center;margin-top:30px">
+  <span style="font-size:18px;background-image: url('http://subtlepatterns.com/patterns/light_toast.png');position: relative; top: -0.65em;padding-left:5px;padding-right:5px">
+    Screenshots
+  </span>
+</div>
+	<div class="row show-grid" style="margin-top: 20px">
 		{% for screenshot in screenshot_list %}
 		<div class="span3"><img src="{{screenshot.url}}" alt="{{product.name}}" width="auto"/></div>
 		{% endfor %}
 	</div>
-      <hr>
-    <div class="tabbable tabs-left">
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#videos" data-toggle="tab">Videos</a></li>
-          <li><a href="#presentations" data-toggle="tab">Presentations</a></li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane active" id="videos">
-			  <div class="row show-grid">
-				  <div class="span4">
+<div style="height: 2px; background-color: white; text-align: center;margin-top:30px">
+  <span style="font-size:18px;background-image: url('http://subtlepatterns.com/patterns/light_toast.png');position: relative; top: -0.65em;padding-left:5px;padding-right:5px">
+    Videos
+  </span>
+</div>
+	<div class="row show-grid" style="margin-top: 20px">
+				  <div class="span6">
 				  <iframe width="280" height="235" src="http://www.youtube.com/embed/sdy_lqK41FU" frameborder="0" allowfullscreen></iframe>
 				  </div>
-				  <div class="span4">
+				  <div class="span6">
 				  <iframe width="280" height="235" src="http://www.youtube.com/embed/sdy_lqK41FU" frameborder="0" allowfullscreen></iframe>
 				  </div>
 			  </div>
-          </div>
-          <div class="tab-pane" id="presentations">
-            <p>Howdy, I'm in Section B.</p>
-          </div>
-        </div>
-      </div> <!-- /tabbable -->
+<div style="height: 2px; background-color: white; text-align: center;margin-top:30px">
+  <span style="font-size:18px;background-image: url('http://subtlepatterns.com/patterns/light_toast.png');position: relative; top: -0.65em;padding-left:5px;padding-right:5px">
+    Presentations
+  </span>
+</div>
+	<div class="row show-grid" style="margin-top: 20px">
+			  </div>
 
 {% endblock %}

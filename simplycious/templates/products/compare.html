@@ -1,9 +1,11 @@
 {% extends "base_breadcrumbs.html" %}
 {% block mainContent %}
 
-<form class="well form-inline">
-	<input type="text" class="input-large" placeholder="Helpshift" style="margin-left:50px">
-	<input type="password" class="input-large" placeholder="Zendesk" style="margin-left:50px">
+<form class="well form-inline" action="/products/compare/" method="post">
+	{{form.product1}}
+	{{form.product2}}
+<!--	<input id="product1" type="text" class="input-large" placeholder="Helpshift" style="margin-left:50px">
+	<input id="product2" type="text" class="input-large" placeholder="Zendesk" style="margin-left:50px"> -->
 	<button type="submit" class="btn btn-primary" style="margin-left:50px">Compare</button>
 </form>
 
