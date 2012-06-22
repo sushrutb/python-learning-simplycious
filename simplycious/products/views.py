@@ -1,12 +1,13 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import Context, loader
-from products.models import Product, Category, Screenshot, ProductTag, AddProductForm, Video, Presentation, Tag, CategoryTag, CompareProductForm
+from products.models import *
 
 def index(request):
     category_list = Category.objects.all()
 
-    product_list = [[product for product in Product.objects.filter(category=category)] for category in category_list]
+    product_list = [(category, (product for product in Product.objects.filter(category=category))) for category in Category.objects.all()]
+    # product_list = [[product for product in Product.objects.filter(category=category)] for category in category_list]
     t = loader.get_template('products/index.html')
     c = Context ({
                   'category_list' : category_list,
@@ -45,7 +46,7 @@ def get_by_name(request, product_slug):
     })
 
 def add(request):
-    crumbs = ('Home', 'Product', 'Add')
+    crumbs = [('Home', '/'), ('Product', '/product/'), ('Add', '')]
     if request.method == "POST":
         form = AddProductForm(request.POST)
         if (form.is_valid()):
@@ -57,11 +58,23 @@ def add(request):
             u = form.cleaned_data['url']
             c = form.cleaned_data['category']
             cat = Category.objects.filter(id = c)[0]
+            companyname = form.cleaned_data['companyname']
+            companyurl = form.cleaned_data['companyurl']
+            companylogo = form.cleaned_data['companylogo']
+            companydesc = form.cleaned_data['companydesc']
             
-            product = Product(name=n, desc=d, logo=l, url=u, slug=s, category=cat, tagline=line.strip())
+            # Get company, if company exists do nothing, else create company
+            company = Company.objects.filter(name=companyname)
+            if company is None or len(company) == 0: 
+                company = Company(name=companyname, url=companyurl,logo=companylogo, desc=companydesc)
+                company.save()
+            else:
+                company = company[0]
+            
+            # Save product
+            product = Product(name=n, desc=d, logo=l, url=u, slug=s, category=cat, tagline=line.strip(), company=company)
             product.save()
 
-            
             ss1 = form.cleaned_data['ss1']
             if (ss1 is not None):
                 ps1 = Screenshot(product=product, url=ss1)
@@ -134,7 +147,7 @@ def add(request):
                     product_tag = ProductTag(product=product, tag=temp_tag)
                     product_tag.save()
             
-            return HttpResponseRedirect("/products/")
+            return HttpResponseRedirect("/product/"+ product.slug + '/')
     else:
         form = AddProductForm()
         

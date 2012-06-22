@@ -24,7 +24,7 @@ urlpatterns = patterns('',
                        url(r'^category/savecategory/$', 'category.views.save'),
                        url(r'^category/(?P<cat_slug>[-\w]+)/$', 'category.views.get_by_slug'),
                        
-                       
+                       url(r'^tags/add/$', 'tags.views.add'),
                        url(r'^admin/', include(admin.site.urls)),
                        
                        (r'^accounts/login/$',  login),

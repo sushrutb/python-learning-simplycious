@@ -14,9 +14,9 @@ class AddTagForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(AddTagForm, self).__init__(*args, **kwargs)
         self.fields['parent'] = forms.ChoiceField(
-            choices=[('', '----------')]+ [(tag.id, tag.name) for tag in Tag.objects.all()])
+            choices=[('', '----------')]+ [(tag.id, tag.name) for tag in Tag.objects.all()], required=False)
         self.fields['related'] = forms.ChoiceField(
-            choices=[('', '----------')]+ [(tag.id, tag.name) for tag in Tag.objects.all()])
+            choices=[('', '----------')]+ [(tag.id, tag.name) for tag in Tag.objects.all()], required=False)
         
         
 class AddCategoryForm(forms.Form):
@@ -31,7 +31,7 @@ class AddCategoryForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(AddCategoryForm, self).__init__(*args, **kwargs)
         self.fields['parent'] = forms.ChoiceField(
-            choices=[('', '----------')]+ [(category.id, category.name) for category in Category.objects.all()])
+            choices=[('', '----------')]+ [(category.id, category.name) for category in Category.objects.all()], required=False)
 
 class AddProductForm(forms.Form):
     name = forms.CharField()
@@ -43,31 +43,46 @@ class AddProductForm(forms.Form):
     category = forms.ChoiceField(choices = (), widget=forms.Select)
     
     # screenshots, videos and presentations.
-    ss1 = forms.URLField()
-    ss2 = forms.URLField()
-    ss3 = forms.URLField()
-    ss4 = forms.URLField()
-    ss5 = forms.URLField()
-    v1 = forms.URLField()
-    v2 = forms.URLField()
-    v3 = forms.URLField()
-    p1 = forms.URLField()
-    p2 = forms.URLField()
-    p3 = forms.URLField()
+    ss1 = forms.URLField(required=False)
+    ss2 = forms.URLField(required=False)
+    ss3 = forms.URLField(required=False)
+    ss4 = forms.URLField(required=False)
+    ss5 = forms.URLField(required=False)
+    v1 = forms.URLField(required=False)
+    v2 = forms.URLField(required=False)
+    v3 = forms.URLField(required=False)
+    p1 = forms.URLField(required=False)
+    p2 = forms.URLField(required=False)
+    p3 = forms.URLField(required=False)
     
-    tags = forms.CharField(widget=Textarea)
+    tags = forms.CharField(widget=Textarea,required=False)
+    
+    companyname = forms.CharField()
+    companyurl = forms.URLField(required=False)
+    companylogo = forms.URLField(required=False)
+    companydesc = forms.CharField(widget=forms.Textarea,required=False)
     
     def __init__(self, *args, **kwargs):
         super(AddProductForm, self).__init__(*args, **kwargs)
         self.fields['category'] = forms.ChoiceField(
             choices=[('', '----------')]+ [(category.id, category.name) for category in Category.objects.all()])
 
+class Company(models.Model):
+    name = models.CharField(max_length=256)
+    url = models.URLField(null=True)
+    logo = models.URLField(null=True)
+    desc = models.TextField(null=True)
+    
 class Tag(models.Model):
     name = models.CharField(max_length=256)
     desc = models.TextField(null=True)
     parent = models.ForeignKey('self', null=True)
     related = models.ForeignKey('self', null=True, related_name='related_tags')
     last_modified = models.DateTimeField(auto_now = True)
+    status = models.BooleanField(default=True)
+    ext_fld1 = models.TextField(null=True)
+    ext_fld2 = models.TextField(null=True)
+    ext_fld3 = models.TextField(null=True)
     def __unicode__(self):
         return self.name + ' > Tag'
 
@@ -81,6 +96,11 @@ class Category(models.Model):
     logo = models.URLField()
     tags = models.ManyToManyField(Tag, through='CategoryTag')
     last_modified = models.DateTimeField(auto_now = True)
+    status = models.IntegerField(null=True)
+    ext_fld1 = models.TextField(null=True)
+    ext_fld2 = models.TextField(null=True)
+    ext_fld3 = models.TextField(null=True)
+
     def __unicode__(self):
         return self.name
     
@@ -94,6 +114,12 @@ class Product(models.Model):
     
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tag, through='ProductTag')
+    company = models.ForeignKey(Company, null=True)
+    
+    status = models.IntegerField(null=True)
+    ext_fld1 = models.TextField(null=True)
+    ext_fld2 = models.TextField(null=True)
+    ext_fld3 = models.TextField(null=True)
     
     last_modified = models.DateTimeField(auto_now = True)
     

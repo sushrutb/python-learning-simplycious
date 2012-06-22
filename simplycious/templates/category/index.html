@@ -1,16 +1,6 @@
-{% extends "base.html" %}
-{% block Content %}
-
-	<div class="hero-unit">
-		<h1>Simplycious</h1>
-		<p>Simplest way to choose software!</p>
-		<p>
-			<a class="btn btn-primary btn-large">
-			Learn more
-			</a>
-		</p>
-	</div>
-  
+{% extends "base_breadcrumbs.html" %}
+{% block mainContent %}
+      <!-- Example row of columns -->
   {% for products in product_list %}
   {% with i=forloop.counter0 %}
   	{% if i|add:"3"|divisibleby:"3" %}
@@ -28,5 +18,6 @@
   	{% endif %}
   {% endwith %}
   {% endfor %}
- </div>
+  <hr>
+
 {% endblock %}

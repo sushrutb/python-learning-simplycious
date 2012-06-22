@@ -9,7 +9,7 @@ def index(request):
     return HttpResponse("Tag index page")
 
 def add(request):
-    crumbs = ('Home', 'Category', 'Add')
+    crumbs = [('Home', '/'), ('Tags', '/tags/'), ('Add', '')]
     if request.method == "POST":
         form = AddTagForm(request.POST)
         if (form.is_valid()):
@@ -18,10 +18,13 @@ def add(request):
             p = form.cleaned_data['parent']
             r = form.cleaned_data['related']
             
-            tag = Tag(name=n, desc=d, parent=Tag.objects.filter(id=p)[0], related=Tag.objects.filter(id=r)[0])
+            
+            tag = Tag(name=n, desc=d)
+            tag.parent = Tag.objects.get(id=int(p)) if p else None
+            tag.related = Tag.objects.get(id=int(p)) if r else None
             tag.save()
 
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect("/tags/add/")
     else:
         form = AddTagForm()
     

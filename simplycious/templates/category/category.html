@@ -33,6 +33,25 @@
 		</div>
 	</div>
 	<hr>
+	  {% for subcategory in subcategory_list %}
+	  {% with i=forloop.counter0 %}
+	  	{% if i|add:"3"|divisibleby:"3" %}
+	  	<div class="row" style="margin-top:40px">
+	  	{% endif %}
+	    	<div class="span4">
+	      		<img class="bs-icon" src="http://dl.dropbox.com/u/3350353/simplycious/assets/img/glyphicons_042_group.png">
+	      		<h2><a href="/category/{{subcategory.0.slug}}">{{ subcategory.0.slug }}</a></h2>
+	      		<p>{% for product in subcategory.1 %} <a href="/product/{{product.slug}}">{{product.name}} </a> {% if not forloop.last %},&nbsp;{% endif %} 
+	      			{% endfor %}
+	      		</p>
+	    	</div>
+	  	{% if i|add:"1"|divisibleby:"3" %}
+	  	</div>
+	  	{% endif %}
+	  {% endwith %}
+	  {% endfor %}
+
+	<hr>
 	{% for product in product_list %}
 	<div class="row show-grid" style="margin-top:5px">
 		<div class="span12 product-row">
